@@ -64,11 +64,6 @@ contract  Voting{
     return voters[msg.sender];
    }
 
-   function getAllCandidate() public view returns(Candidate [] memory){
-    
-   }
-
-
 }
 
 
