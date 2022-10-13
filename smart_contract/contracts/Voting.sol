@@ -5,12 +5,12 @@ pragma experimental ABIEncoderV2;
 
 
 
-contract Voting{
-   
-
+contract  Voting{
    string public name;
    string public describetion;
    uint256 public numberOfCandidate=0;
+     uint public electionId=0;
+   
 
    struct Candidate{
     uint256 id;
@@ -21,20 +21,20 @@ contract Voting{
   
 
    mapping(uint=> Candidate) public candidates;
-
+   mapping(uint => address) public Elecitions;
    mapping(address=>bool) public voters;
-    constructor(string []memory _nda,string [] memory _candidates) public{ 
 
-    require(_candidates.length>0,"There most find at least ");
-    name=_nda[0];
-    describetion=_nda[1];
-
-    for(uint i=0;i<_candidates.length;i++){
-         addCandidate(_candidates[i]);
+    function createElecition(string [] memory _nda,string [] memory _candidats) public{
+          require(_candidats.length > 0, "There should be atleast 1 candidate.");
+          name = _nda[0];
+         describetion = _nda[1];
+       for(uint i = 0; i < _candidats.length; i++) {
+      addCandidate(_candidats[i]);
     }
+        Elecitions[electionId]=address(this);
+        electionId++;
 
-   }
- 
+    }
 
    function addCandidate(string memory _name) private{
      candidates[numberOfCandidate]=Candidate(numberOfCandidate,_name,0);
@@ -55,6 +55,21 @@ contract Voting{
    }
 
 
+   function getNumberOfCandidate()public view returns(uint num){
+    num=numberOfCandidate;
+    return num;
+   }
+   function getAllVoters()public view returns(bool ISVoted){
+   // require(!voters[msg.sender],"Voter is aleardy voted");
+    return voters[msg.sender];
+   }
+
+   function getAllCandidate() public view returns(Candidate [] memory){
+    
+   }
+
+
 }
+
 
 
