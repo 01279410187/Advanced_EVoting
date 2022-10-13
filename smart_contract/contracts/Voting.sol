@@ -2,9 +2,6 @@
 pragma solidity ^0.8.17;
 pragma experimental ABIEncoderV2;
 
-
-
-
 contract  Voting{
    string public name;
    string public describetion;
@@ -25,9 +22,9 @@ contract  Voting{
    mapping(address=>bool) public voters;
 
     function createElecition(string [] memory _nda,string [] memory _candidats) public{
-          require(_candidats.length > 0, "There should be atleast 1 candidate.");
-          name = _nda[0];
-         describetion = _nda[1];
+       require(_candidats.length > 0, "There should be atleast 1 candidate.");
+       name = _nda[0];
+       describetion = _nda[1];
        for(uint i = 0; i < _candidats.length; i++) {
       addCandidate(_candidats[i]);
     }
@@ -60,7 +57,6 @@ contract  Voting{
     return num;
    }
    function getAllVoters()public view returns(bool ISVoted){
-   // require(!voters[msg.sender],"Voter is aleardy voted");
     return voters[msg.sender];
    }
 

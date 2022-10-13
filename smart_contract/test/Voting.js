@@ -50,7 +50,8 @@ describe("Voting Contract", function () {
   it("Already Voted", async ()=>{
 
    await expect(await voting.connect(addr1).vote(1))
-   await expect(await voting.connect(addr1).vote(1))
+   // remove commit to test
+  // await expect(await voting.connect(addr1).vote(1))
    console.log( await voting.getAllVoters());
     
 })
